@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2 = "^2.9.9"
+pyqt6 = "^6.6.0"
+environs = "^9.5.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 120
+skip-string-normalization = 1
+target-version = ["py310", "py311"]
+include = ".py$"
+force-exclude = """
+migrations
+| .venv
+| venv
+"""
+
+[tool.isort]
+profile="black"
+line_length=120
+extend_skip_glob = [
+  "migrations/*",
+  ".venv/*",
+  "venv/*"
+]
+
+
+[tool.ruff]
+line-length = 120
+fix = true
+select = ["E", "F", "Q", "C90", "I", "COM", "T20", "RET", "SIM", "TID", "ARG", "ERA"]
+ignore = ["RET503"]
+exclude = [
+    ".env",
+    "migrations",
+    "venv",
+    "tests",
+]
+
+[tool.ruff.per-file-ignores]
+"settings.py" = ["F405"]
+
+[tool.ruff.flake8-quotes]
+inline-quotes = "single"
